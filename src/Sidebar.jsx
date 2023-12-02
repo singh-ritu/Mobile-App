@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Home from "./Home";
+
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -10,13 +12,14 @@ import {
 } from "@ant-design/icons";
 import { Layout, Menu, Button, theme } from "antd";
 const { Header, Sider, Content } = Layout;
-const Sidebar = () => {
+const Sidebar = (props) => {
   const [collapsed, setCollapsed] = useState(false);
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
   return (
-    <Layout>
+    <Layout className="side-details">
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <Menu
@@ -26,27 +29,57 @@ const Sidebar = () => {
           items={[
             {
               key: "1",
-              icon: <HomeOutlined />,
+              icon: (
+                <HomeOutlined
+                  onClick={() => {
+                    props.handleIcons("1");
+                  }}
+                />
+              ),
               label: "HOME",
             },
             {
               key: "2",
-              icon: <UserOutlined />,
+              icon: (
+                <UserOutlined
+                  onClick={() => {
+                    props.handleIcons("2");
+                  }}
+                />
+              ),
               label: "MY PROFILE",
             },
             {
               key: "3",
-              icon: <LikeOutlined />,
+              icon: (
+                <LikeOutlined
+                  onClick={() => {
+                    props.handleIcons("3");
+                  }}
+                />
+              ),
               label: "MY LIKES",
             },
             {
               key: "4",
-              icon: <UploadOutlined />,
+              icon: (
+                <UploadOutlined
+                  onClick={() => {
+                    props.handleIcons("4");
+                  }}
+                />
+              ),
               label: "MY POSTS",
             },
             {
               key: "5",
-              icon: <SaveOutlined />,
+              icon: (
+                <SaveOutlined
+                  onClick={() => {
+                    props.handleIcons("5");
+                  }}
+                />
+              ),
               label: "MY BOOKMARKS",
             },
           ]}
@@ -78,7 +111,7 @@ const Sidebar = () => {
             background: colorBgContainer,
           }}
         >
-          Content
+          {props.selectedKey === "1" && <Home />}
         </Content>
       </Layout>
     </Layout>
