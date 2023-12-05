@@ -1,3 +1,11 @@
 .side-details {
   height: 100vh;
 }
+.home-details {
+  display: flex;
+}
+.add-post-btn {
+  padding: 16px 24px;
+  height: auto;
+  font-size: 24px;
+}
