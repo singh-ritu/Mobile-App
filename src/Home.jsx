@@ -4,19 +4,39 @@ import Dailog from "./Dailog";
 import { Button, Modal, Space } from "antd";
 
 function Home() {
-  const [post, setpost] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [caption, setCaption] = useState("");
+
+  const handleName = (e) => {
+    console.log(e);
+    setName(e.target.value);
+  };
+  const handleCaption = () => {
+    setCaption(e.target.value);
+  };
+  const handlePost = () => {
+    console.log(name);
+    console.log(caption);
+  };
 
   const newPost = () => {
     // setIsOpen(true);
     Modal.confirm({
-      title: "Confirm",
-      content: "Bla bla ...",
-      footer: (_, { OkBtn, CancelBtn }) => (
+      title: "New Post Details",
+      content: (
+        <Dailog
+          name={name}
+          caption={caption}
+          handleName={handleName}
+          handleCaption={handleCaption}
+        />
+      ),
+      footer: (_, { CancelBtn }) => (
         <>
-          <Button>Custom Button</Button>
+          <Button type="primary" onClick={handlePost}>
+            Create Post
+          </Button>
           <CancelBtn />
-          <OkBtn />
         </>
       ),
     });

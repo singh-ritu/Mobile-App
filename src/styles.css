@@ -9,3 +9,9 @@
   height: auto;
   font-size: 24px;
 }
+.new-post-details {
+  margin: 64px 16px;
+}
+.input-name {
+  margin-bottom: 20px;
+}
