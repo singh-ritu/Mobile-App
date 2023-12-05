@@ -6,47 +6,41 @@ import { Button, Modal, Space } from "antd";
 function Home() {
   const [name, setName] = useState("");
   const [caption, setCaption] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleName = (e) => {
-    console.log(e);
     setName(e.target.value);
   };
-  const handleCaption = () => {
+  const handleCaption = (e) => {
     setCaption(e.target.value);
   };
   const handlePost = () => {
     console.log(name);
     console.log(caption);
   };
+  const modalClose = () => {
+    setIsModalOpen(false);
+  };
 
   const newPost = () => {
-    // setIsOpen(true);
-    Modal.confirm({
-      title: "New Post Details",
-      content: (
-        <Dailog
-          name={name}
-          caption={caption}
-          handleName={handleName}
-          handleCaption={handleCaption}
-        />
-      ),
-      footer: (_, { CancelBtn }) => (
-        <>
-          <Button type="primary" onClick={handlePost}>
-            Create Post
-          </Button>
-          <CancelBtn />
-        </>
-      ),
-    });
+    setIsModalOpen(true);
   };
+
   return (
     <div className="home-details">
       <Button className="add-post-btn" onClick={newPost}>
         +
       </Button>
-      {/* {isOpen && <Dailog />} */}
+      {isModalOpen && (
+        <Dailog
+          name={name}
+          caption={caption}
+          handleName={handleName}
+          handleCaption={handleCaption}
+          handlePost={handlePost}
+          modalClose={modalClose}
+        />
+      )}
     </div>
   );
 }
