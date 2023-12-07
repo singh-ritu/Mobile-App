@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import Details from "./proCard";
 import Dailog from "./Dailog";
 import { Button, Modal, Space } from "antd";
+import ProCard from "@ant-design/pro-card";
 
 function Home() {
   const [name, setName] = useState("");
   const [caption, setCaption] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [input, setInput] = useState("");
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -17,6 +20,12 @@ function Home() {
   const handlePost = () => {
     console.log(name);
     console.log(caption);
+    const postArr = [...posts];
+    postArr.push(input);
+    setPosts(postArr);
+    setName("");
+    setCaption("");
+    modalClose();
   };
   const modalClose = () => {
     setIsModalOpen(false);
@@ -24,6 +33,7 @@ function Home() {
 
   const newPost = () => {
     setIsModalOpen(true);
+    setInput(name, caption);
   };
 
   return (
@@ -41,6 +51,14 @@ function Home() {
           modalClose={modalClose}
         />
       )}
+      <div className="cards">
+        {posts.length > 0 &&
+          posts.map((value, index) => (
+            <div key={index}>
+              <Details />
+            </div>
+          ))}
+      </div>
     </div>
   );
 }
