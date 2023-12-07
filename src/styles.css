@@ -1,8 +1,9 @@
 .side-details {
-  height: 100vh;
+  min-height: 100vh;
 }
 .cards {
   display: flex;
+  flex-wrap: wrap;
 }
 .add-post-btn {
   padding: 16px 24px;

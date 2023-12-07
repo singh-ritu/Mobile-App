@@ -9,23 +9,25 @@ function Home() {
   const [caption, setCaption] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [posts, setPosts] = useState([]);
-  const [input, setInput] = useState("");
 
   const handleName = (e) => {
     setName(e.target.value);
   };
+
   const handleCaption = (e) => {
     setCaption(e.target.value);
   };
   const handlePost = () => {
-    console.log(name);
-    console.log(caption);
+    const postDetails = { name: name, caption: caption };
     const postArr = [...posts];
-    postArr.push(input);
+    postArr.push(postDetails);
     setPosts(postArr);
+    console.log(postDetails);
     setName("");
     setCaption("");
     modalClose();
+    localStorage.setItem(postDetails, JSON.stringify(postDetails));
+    localStorage.getItem(postDetails, JSON.parse(postDetails));
   };
   const modalClose = () => {
     setIsModalOpen(false);
@@ -33,7 +35,6 @@ function Home() {
 
   const newPost = () => {
     setIsModalOpen(true);
-    setInput(name, caption);
   };
 
   return (
@@ -55,7 +56,7 @@ function Home() {
         {posts.length > 0 &&
           posts.map((value, index) => (
             <div key={index}>
-              <Details />
+              <Details postDetails={value} />
             </div>
           ))}
       </div>
@@ -63,3 +64,4 @@ function Home() {
   );
 }
 export default Home;
+// when you have more than value to set use object to create one entity just like one post

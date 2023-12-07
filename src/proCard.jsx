@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 import { Avatar, Card } from "antd";
 const { Meta } = Card;
-const Details = () => (
+const Details = ({ postDetails }) => (
   <Card
     style={{
       width: 300,
@@ -27,8 +27,8 @@ const Details = () => (
       avatar={
         <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />
       }
-      title="Card title"
-      description="This is the description"
+      title={postDetails.name}
+      description={postDetails.caption}
     />
   </Card>
 );
