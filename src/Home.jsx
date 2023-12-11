@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Details from "./proCard";
 import Dailog from "./Dailog";
 import { Button, Modal, Space } from "antd";
@@ -9,6 +9,12 @@ function Home() {
   const [caption, setCaption] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [posts, setPosts] = useState([]);
+  const postArray = "postArray"; //Global variable
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem(postArray));
+    setPosts(data ? data : []); // condition applied because initially the local storage was empty so it returns null as a value and setpost as null because of which in handle post the posts(i.e. null) which is not iterable
+  }, []);
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -19,6 +25,7 @@ function Home() {
   };
   const handlePost = () => {
     const postDetails = { name: name, caption: caption };
+    console.log(posts);
     const postArr = [...posts];
     postArr.push(postDetails);
     setPosts(postArr);
@@ -26,8 +33,7 @@ function Home() {
     setName("");
     setCaption("");
     modalClose();
-    localStorage.setItem(postDetails, JSON.stringify(postDetails));
-    localStorage.getItem(postDetails, JSON.parse(postDetails));
+    localStorage.setItem(postArray, JSON.stringify(postArr));
   };
   const modalClose = () => {
     setIsModalOpen(false);
@@ -53,8 +59,8 @@ function Home() {
         />
       )}
       <div className="cards">
-        {posts.length > 0 &&
-          posts.map((value, index) => (
+        {posts?.length > 0 &&
+          posts?.map((value, index) => (
             <div key={index}>
               <Details postDetails={value} />
             </div>
