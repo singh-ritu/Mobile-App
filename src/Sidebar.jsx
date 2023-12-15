@@ -11,6 +11,7 @@ import {
   SaveOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Button, theme } from "antd";
+import MyProfile from "./MyProfile";
 const { Header, Sider, Content } = Layout;
 const Sidebar = (props) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -112,6 +113,7 @@ const Sidebar = (props) => {
           }}
         >
           {props.selectedKey === "1" && <Home />}
+          {props.selectedKey === "2" && <MyProfile />}
         </Content>
       </Layout>
     </Layout>
